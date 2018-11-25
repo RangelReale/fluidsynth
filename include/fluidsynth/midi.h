@@ -62,13 +62,20 @@ FLUIDSYNTH_API int fluid_midi_event_set_lyrics(fluid_midi_event_t *evt,
 FLUIDSYNTH_API int fluid_midi_event_get_lyrics(fluid_midi_event_t *evt, 
 		void **data, int *size);
 
+FLUIDSYNTH_API unsigned int fluid_midi_timed_event_get_ticks(fluid_midi_timed_event_t *evt);
+FLUIDSYNTH_API fluid_player_t *fluid_midi_timed_event_get_player(fluid_midi_timed_event_t *evt);
+FLUIDSYNTH_API fluid_track_t *fluid_midi_timed_event_get_track(fluid_midi_timed_event_t *evt);
+FLUIDSYNTH_API fluid_midi_event_t *fluid_midi_timed_event_get_event(fluid_midi_timed_event_t *evt);
+
 /**
  * MIDI track type.
  * @since 1.1.0
  */
 FLUIDSYNTH_API fluid_track_t *new_fluid_track(int num);
 FLUIDSYNTH_API void delete_fluid_track(fluid_track_t *track);
+FLUIDSYNTH_API int fluid_track_get_num(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_set_name(fluid_track_t *track, char *name);
+FLUIDSYNTH_API char *fluid_track_get_name(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_add_event(fluid_track_t *track, fluid_midi_event_t *evt);
 FLUIDSYNTH_API fluid_midi_event_t *fluid_track_next_event(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_get_duration(fluid_track_t *track);
@@ -106,6 +113,8 @@ typedef enum
 typedef int (*handle_onload_func_t)(void *data, fluid_player_t *player);
 
 typedef int (*handle_midi_event_func_t)(void *data, fluid_midi_event_t *event);
+
+typedef int (*handle_midi_timed_event_func_t)(void *data, fluid_midi_timed_event_t *event);
 
 FLUIDSYNTH_API fluid_midi_router_t *new_fluid_midi_router(fluid_settings_t *settings,
         handle_midi_event_func_t handler,
@@ -161,6 +170,10 @@ FLUIDSYNTH_API int fluid_player_count_tracks(fluid_player_t *player);
 FLUIDSYNTH_API fluid_track_t *fluid_player_get_track(fluid_player_t *player, int i);
 FLUIDSYNTH_API int fluid_player_set_playback_callback(fluid_player_t *player, handle_midi_event_func_t handler, void *handler_data);
 FLUIDSYNTH_API int fluid_player_set_onload_callback(fluid_player_t *player, handle_onload_func_t handler, void *handler_data);
+FLUIDSYNTH_API int fluid_player_set_timed_playback_callback(fluid_player_t *player,
+                                                            handle_midi_timed_event_func_t handler,
+                                                            void *handler_data);
+FLUIDSYNTH_API fluid_synth_t *fluid_player_get_synth(fluid_player_t *player);
 
 FLUIDSYNTH_API int fluid_player_get_status(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_get_current_tick(fluid_player_t *player);
