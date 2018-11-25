@@ -61,6 +61,18 @@ FLUIDSYNTH_API int fluid_midi_event_get_lyrics(fluid_midi_event_t *evt,
 		void **data, int *size);
 
 /**
+ * MIDI track type.
+ * @since 1.1.0
+ */
+FLUIDSYNTH_API fluid_track_t *new_fluid_track(int num);
+FLUIDSYNTH_API void delete_fluid_track(fluid_track_t *track);
+FLUIDSYNTH_API int fluid_track_set_name(fluid_track_t *track, char *name);
+FLUIDSYNTH_API int fluid_track_add_event(fluid_track_t *track, fluid_midi_event_t *evt);
+FLUIDSYNTH_API fluid_midi_event_t *fluid_track_next_event(fluid_track_t *track);
+FLUIDSYNTH_API int fluid_track_get_duration(fluid_track_t *track);
+FLUIDSYNTH_API int fluid_track_reset(fluid_track_t *track);
+
+/**
  * MIDI router rule type.
  * @since 1.1.0
  */
@@ -143,7 +155,10 @@ FLUIDSYNTH_API int fluid_player_join(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_set_loop(fluid_player_t *player, int loop);
 FLUIDSYNTH_API int fluid_player_set_midi_tempo(fluid_player_t *player, int tempo);
 FLUIDSYNTH_API int fluid_player_set_bpm(fluid_player_t *player, int bpm);
+FLUIDSYNTH_API int fluid_player_count_tracks(fluid_player_t *player);
+FLUIDSYNTH_API fluid_track_t *fluid_player_get_track(fluid_player_t *player, int i);
 FLUIDSYNTH_API int fluid_player_set_playback_callback(fluid_player_t *player, handle_midi_event_func_t handler, void *handler_data);
+FLUIDSYNTH_API int fluid_player_set_onload_callback(fluid_player_t *player, handle_onload_func_t handler, void *handler_data);
 
 FLUIDSYNTH_API int fluid_player_get_status(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_get_current_tick(fluid_player_t *player);
