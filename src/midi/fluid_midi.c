@@ -1689,9 +1689,15 @@ new_fluid_player(fluid_synth_t *synth)
     player->cur_ticks = 0;
     player->seek_ticks = -1;
     fluid_player_set_playback_callback(player, fluid_synth_handle_midi_event, synth);
+    player->timedplayback_callback = NULL;
+    player->timedplayback_userdata = NULL;
     player->onload_callback = NULL;
     player->onload_userdata = NULL;
-	player->use_system_timer = fluid_settings_str_equal(synth->settings,
+    player->tick_interval = 1;
+    player->tick_interval_last = 0;
+    player->tick_callback = NULL;
+    player->tick_userdata = NULL;
+    player->use_system_timer = fluid_settings_str_equal(synth->settings,
                                "player.timing-source", "system");
 
     fluid_settings_getint(synth->settings, "player.reset-synth", &i);
@@ -1872,6 +1878,14 @@ int fluid_player_set_onload_callback(fluid_player_t *player, handle_onload_func_
 {
     player->onload_callback = handler;
     player->onload_userdata = handler_data;
+    return FLUID_OK;
+}
+
+int fluid_player_set_tick_callback(fluid_player_t *player, int tick_interval, handle_tick_func_t handler, void *handler_data)
+{
+    player->tick_interval = tick_interval;
+    player->tick_callback = handler;
+    player->tick_userdata = handler_data;
     return FLUID_OK;
 }
 
@@ -2082,6 +2096,7 @@ fluid_player_playlist_load(fluid_player_t *player, unsigned int msec)
     player->start_msec = msec;
     player->start_ticks = 0;
     player->cur_ticks = 0;
+    player->tick_interval_last = 0;
 
     if(player->reset_synth_between_songs)
     {
@@ -2130,6 +2145,15 @@ fluid_player_callback(void *data, unsigned int msec)
         player->cur_ticks = (player->start_ticks
                              + (int)((double)(player->cur_msec - player->start_msec)
                                      / player->deltatime + 0.5)); /* 0.5 to average overall error when casting */
+
+		if (player->tick_callback != NULL)
+        {
+            if (player->cur_ticks - player->tick_interval_last >= player->tick_interval)
+            {
+                player->tick_callback(player->tick_userdata, player, player->cur_ticks);
+                player->tick_interval_last = player->cur_ticks;
+            }
+        }
 
         if(player->seek_ticks >= 0)
         {

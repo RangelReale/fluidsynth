@@ -142,6 +142,11 @@ struct _fluid_player_t
 
 	handle_onload_func_t onload_callback; /* function fired when new MIDI data is loaded, such as a new file */
     void *onload_userdata; /* pointer to user-defined data passed to onload_callback function */
+
+	int tick_interval;
+    int tick_interval_last;
+    handle_tick_func_t tick_callback; /* function fired on a new tick */
+    void *tick_userdata; /* pointer to user-defined data passed to tick_callback function */
 };
 
 void fluid_player_settings(fluid_settings_t *settings);
