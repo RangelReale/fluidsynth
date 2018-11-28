@@ -34,7 +34,7 @@ extern "C" {
 
 FLUIDSYNTH_API void* fluid_malloc(int size);
 FLUIDSYNTH_API void *fluid_remalloc(void* ptr, int size);
-FLUIDSYNTH_API void *fluid_free(void *ptr);
+FLUIDSYNTH_API void fluid_free(void *ptr);
 
 #ifdef __cplusplus
 }

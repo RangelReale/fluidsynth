@@ -103,6 +103,7 @@ extern "C" {
 #include "fluidsynth/seq.h"
 #include "fluidsynth/seqbind.h"
 #include "fluidsynth/log.h"
+#include "fluidsynth/memory.h"
 #include "fluidsynth/misc.h"
 #include "fluidsynth/mod.h"
 #include "fluidsynth/gen.h"
