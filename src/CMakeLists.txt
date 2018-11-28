@@ -122,6 +122,7 @@ set ( libfluidsynth_SOURCES
     utils/fluid_hash.h
     utils/fluid_list.c
     utils/fluid_list.h
+    utils/fluid_memory.c
     utils/fluid_ringbuffer.c
     utils/fluid_ringbuffer.h
     utils/fluid_settings.c
@@ -193,6 +194,7 @@ set ( public_HEADERS
     ${CMAKE_SOURCE_DIR}/include/fluidsynth/gen.h
     ${CMAKE_SOURCE_DIR}/include/fluidsynth/ladspa.h
     ${CMAKE_SOURCE_DIR}/include/fluidsynth/log.h
+    ${CMAKE_SOURCE_DIR}/include/fluidsynth/memory.h
     ${CMAKE_SOURCE_DIR}/include/fluidsynth/midi.h
     ${CMAKE_SOURCE_DIR}/include/fluidsynth/misc.h
     ${CMAKE_SOURCE_DIR}/include/fluidsynth/mod.h
