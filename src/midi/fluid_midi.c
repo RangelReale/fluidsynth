@@ -1378,6 +1378,38 @@ static void fluid_midi_event_set_sysex_LOCAL(fluid_midi_event_t *evt, int type, 
  *     fluid_midi_timed_event_t
  */
 
+/**
+ * Create a MIDI timed event structure.
+ * @return New MIDI timed event structure or NULL when out of memory.
+ */
+fluid_midi_timed_event_t *new_fluid_midi_timed_event()
+{
+    fluid_midi_timed_event_t *evt;
+    evt = FLUID_NEW(fluid_midi_timed_event_t);
+
+    if (evt == NULL)
+    {
+        FLUID_LOG(FLUID_ERR, "Out of memory");
+        return NULL;
+    }
+
+    evt->ticks = 0;
+    evt->player = NULL;
+    evt->track = NULL;
+    evt->event = NULL;
+    return evt;
+}
+
+/**
+ * Delete MIDI timed event structure.
+ * @param evt MIDI timed event structure
+ */
+void delete_fluid_midi_timed_event(fluid_midi_timed_event_t *evt)
+{
+    fluid_return_if_fail(evt != NULL);
+    FLUID_FREE(evt);
+}
+
 unsigned int fluid_midi_timed_event_get_ticks(fluid_midi_timed_event_t *evt)
 {
     return evt->ticks;

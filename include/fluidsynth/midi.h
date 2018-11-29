@@ -62,6 +62,8 @@ FLUIDSYNTH_API int fluid_midi_event_set_lyrics(fluid_midi_event_t *evt,
 FLUIDSYNTH_API int fluid_midi_event_get_lyrics(fluid_midi_event_t *evt, 
 		void **data, int *size);
 
+FLUIDSYNTH_API fluid_midi_timed_event_t *new_fluid_midi_timed_event(void);
+FLUIDSYNTH_API void delete_fluid_midi_timed_event(fluid_midi_timed_event_t *event);
 FLUIDSYNTH_API unsigned int fluid_midi_timed_event_get_ticks(fluid_midi_timed_event_t *evt);
 FLUIDSYNTH_API fluid_player_t *fluid_midi_timed_event_get_player(fluid_midi_timed_event_t *evt);
 FLUIDSYNTH_API fluid_track_t *fluid_midi_timed_event_get_track(fluid_midi_timed_event_t *evt);
