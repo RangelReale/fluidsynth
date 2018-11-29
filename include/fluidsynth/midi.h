@@ -185,6 +185,9 @@ FLUIDSYNTH_API int fluid_player_get_total_ticks(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_get_bpm(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_get_midi_tempo(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_seek(fluid_player_t *player, int ticks);
+FLUIDSYNTH_API unsigned int fluid_player_get_division(fluid_player_t *player);
+/* milliseconds per midi tick. depends on set-tempo */
+FLUIDSYNTH_API double fluid_player_get_deltatime(fluid_player_t *player);
 
 
 /***************************************************************
