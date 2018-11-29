@@ -162,6 +162,7 @@ FLUIDSYNTH_API fluid_player_t *new_fluid_player(fluid_synth_t *synth);
 FLUIDSYNTH_API void delete_fluid_player(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_add(fluid_player_t *player, const char *midifile);
 FLUIDSYNTH_API int fluid_player_add_mem(fluid_player_t *player, const void *buffer, size_t len);
+FLUIDSYNTH_API void fluid_player_playlist_load(fluid_player_t *player, unsigned int msec);
 FLUIDSYNTH_API int fluid_player_play(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_stop(fluid_player_t *player);
 FLUIDSYNTH_API int fluid_player_join(fluid_player_t *player);

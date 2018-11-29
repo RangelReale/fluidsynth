@@ -49,7 +49,6 @@ static int fluid_player_callback(void *data, unsigned int msec);
 static int fluid_player_reset(fluid_player_t *player);
 static int fluid_player_load(fluid_player_t *player, fluid_playlist_item *item);
 static void fluid_player_advancefile(fluid_player_t *player);
-static void fluid_player_playlist_load(fluid_player_t *player, unsigned int msec);
 
 static fluid_midi_file *new_fluid_midi_file(const char *buffer, size_t length);
 static void delete_fluid_midi_file(fluid_midi_file *mf);
