@@ -76,6 +76,7 @@ FLUIDSYNTH_API void delete_fluid_track(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_get_num(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_set_name(fluid_track_t *track, char *name);
 FLUIDSYNTH_API char *fluid_track_get_name(fluid_track_t *track);
+FLUIDSYNTH_API fluid_midi_event_t *fluid_track_first_event(fluid_track_t *track);
 FLUIDSYNTH_API fluid_midi_event_t *fluid_track_next_event(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_get_duration(fluid_track_t *track);
 FLUIDSYNTH_API int fluid_track_reset(fluid_track_t *track);

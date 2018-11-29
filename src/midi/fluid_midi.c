@@ -1529,6 +1529,15 @@ fluid_track_add_event(fluid_track_t *track, fluid_midi_event_t *evt)
 }
 
 /*
+ * fluid_track_first_event
+ */
+fluid_midi_event_t *fluid_track_first_event(fluid_track_t *track)
+{
+    track->cur = track->first;
+    return track->cur;
+}
+
+/*
  * fluid_track_next_event
  */
 fluid_midi_event_t *
