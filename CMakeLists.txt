@@ -454,6 +454,19 @@ if(NOT enable-pkgconfig)
     message( STATUS "GLIB_INCLUDE_DIRS: " ${GLIB_INCLUDE_DIRS} )
     message( STATUS "GLIB_LIBRARIES: " ${GLIB_LIBRARIES} )
 
+    unset ( LIBSNDFILE_SUPPORT CACHE )
+    unset ( LIBSNDFILE_HASVORBIS CACHE )
+    if ( enable-libsndfile )
+    find_package(LibSndFile 1.0.0)
+    set(LIBSNDFILE_LIBRARIES sndfile-shared)
+    set ( LIBSNDFILE_SUPPORT ${LibSndFile_FOUND} )
+    set ( LIBSNDFILE_HASVORBIS 1 )
+    else ( enable-libsndfile )
+    unset_pkg_config ( LIBSNDFILE )
+    unset_pkg_config ( LIBSNDFILE_VORBIS )
+    endif ( enable-libsndfile )
+
+
 else(NOT enable-pkgconfig)
 
     find_package ( PkgConfig REQUIRED )
