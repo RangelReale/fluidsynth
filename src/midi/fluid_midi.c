@@ -38,6 +38,8 @@ static char *fluid_file_read_full(fluid_file fp, size_t *length);
 static void fluid_midi_event_set_sysex_LOCAL(fluid_midi_event_t *evt, int type, void *data, int size, int dynamic);
 #define READ_FULL_INITIAL_BUFLEN 1024
 
+static int fluid_track_add_event(fluid_track_t *track, fluid_midi_event_t *evt);
+
 static int fluid_track_send_events(fluid_track_t *track,
                                    fluid_synth_t *synth,
                                    fluid_player_t *player,
